@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recommender Hub4U</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Animated Background -->
+  <div id="bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <!-- Loader -->
+  <div id="loader" class="loader">
+    <div class="spinner"></div>
+    <p>Loading recommendations...</p>
+  </div>
+
+  <!-- Main App -->
+  <div class="container" id="app" style="display:none">
+    <header>
+      <div class="logo">R4U</div>
+      <div style="flex:1">
+        <h1>Recommender Hub4U</h1>
+        <p class="lead">Discover movies, anime & web series that match your mood 🎬✨</p>
+      </div>
+
+      <!-- ⏰ Clock -->
+      <div class="clock" id="clock"></div>
+    </header>
+
+    <div class="controls-row">
+      <input id="searchInput" placeholder="Search moods, titles or genres..." />
+      <select id="typeSelect">
+        <option value="all">All Types</option>
+        <option value="Anime">Anime</option>
+        <option value="Movie">Movie</option>
+        <option value="Web Series">Web Series</option>
+      </select>
+      <select id="sortSelect">
+        <option value="rating">Sort: Rating (high → low)</option>
+        <option value="alpha">Sort: Alphabetical (A → Z)</option>
+      </select>
+      <button id="searchBtn" class="pill">Search</button>
+    </div>
+
+    <div id="filePrompt" class="small hidden">
+      ⚙️ Could not auto-load. Please select your <b>data.json</b>:
+      <input type="file" id="fileInput" accept=".json" />
+    </div>
+
+    <section>
+      <strong>Available Moods</strong>
+      <div class="mood-wrap" id="moodWrap"></div>
+      <p class="small">Click a mood to open recommendations in a new tab with live posters.</p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- Live Clock Script -->
+  <script>
+    function updateClock(){
+      const el = document.getElementById("clock");
+      if(!el) return;
+      const now = new Date();
+      const hrs = String(now.getHours()).padStart(2,'0');
+      const mins = String(now.getMinutes()).padStart(2,'0');
+      const secs = String(now.getSeconds()).padStart(2,'0');
+      el.textContent = `${hrs}:${mins}:${secs}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
